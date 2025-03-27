@@ -6,13 +6,14 @@ function App() {
 
   const calculateStringValue = (string) => {
     // current scenario ->
-    // 1. Support different delimiters
+    // 1.  negative number will throw an exception
     if (string === "") {
       return 0;
     }
     let result = 0;
     let defaultSeparator = ","
     let includesDelimiter = string?.includes("//");
+    let isNegativeExsits = false
 
     // console.log(includesDelimiter)
 
@@ -29,13 +30,19 @@ function App() {
     string = string.replace(/(?:\r\n|\r|\n)/g, defaultSeparator);
 
     string?.split(defaultSeparator)?.map((el) => {
+      isNegativeExsits = parseInt(el) < 0
       result += parseInt(el) || 0;
     })
 
+    if (isNegativeExsits) {
+      toast.error("negatives not allowed")
+      return
+    }
+
     return result
 
-    // correct results for calculateStringValue("//;\n1;2")
-    // correct results for calculateStringValue("1\n2,3")
+    // failed results for calculateStringValue("-1,2")
+    // correct results for calculateStringValue("2,3,-1")
   }
 
   const handleInputChange = (e) => {
