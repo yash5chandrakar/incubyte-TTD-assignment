@@ -6,18 +6,19 @@ function App() {
 
   const calculateStringValue = (string) => {
     // current scenario ->
-    // 1. 2 or 3 numbers 
-    // 2. Return 0 for emtpy string
-    // 3. Default Separator is ","
+    // 1. Handle Any amount of numbers
+    // 2. Allow the Add method to handle new lines
     if (string === "") {
       return 0;
     }
 
+    string = string.replace(/(?:\r\n|\r|\n)/g, ",");
     let numberArray = string?.split(",")
-    // console.log(numberArray)
-
     let result = numberArray.reduce((acc, item) => acc + parseInt(item), 0);
     return result
+
+    // correct results for calculateStringValue("1,2,4,6,34,2,323")
+    // correct results for calculateStringValue("“1\n2,3")
   }
 
   const handleInputChange = (e) => {
