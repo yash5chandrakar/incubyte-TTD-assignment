@@ -30,7 +30,10 @@ function App() {
     string = string.replace(/(?:\r\n|\r|\n)/g, defaultSeparator);
 
     string?.split(defaultSeparator)?.map((el) => {
-      isNegativeExsits = parseInt(el) < 0
+      let isNumberNegative = parseInt(el) < 0;
+      if (isNumberNegative) {
+        isNegativeExsits = true
+      }
       result += parseInt(el) || 0;
     })
 
@@ -41,7 +44,7 @@ function App() {
 
     return result
 
-    // failed results for calculateStringValue("-1,2")
+    // correct results for calculateStringValue("-1,2")
     // correct results for calculateStringValue("2,3,-1")
   }
 
