@@ -54,9 +54,14 @@ function App() {
   };
 
   const handleCalculate = () => {
-    let calculatedValue = calculateStringValue(inputValue)
-    if (calculatedValue) {
-      toast.success(`Result is : ${calculatedValue}`)
+    try {
+      let calculatedValue = calculateStringValue(inputValue)
+      if (calculatedValue) {
+        toast.success(`Result is : ${calculatedValue}`)
+      }
+    }
+    catch (err) {
+      toast.error(`Some Error Occured : ${err?.message || ""}`)
     }
   }
 
