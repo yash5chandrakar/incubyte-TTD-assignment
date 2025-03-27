@@ -6,19 +6,36 @@ function App() {
 
   const calculateStringValue = (string) => {
     // current scenario ->
-    // 1. Handle Any amount of numbers
-    // 2. Allow the Add method to handle new lines
+    // 1. Support different delimiters
     if (string === "") {
       return 0;
     }
+    let result = 0;
+    let defaultSeparator = ","
+    let includesDelimiter = string?.includes("//");
 
-    string = string.replace(/(?:\r\n|\r|\n)/g, ",");
-    let numberArray = string?.split(",")
-    let result = numberArray.reduce((acc, item) => acc + parseInt(item), 0);
+    // console.log(includesDelimiter)
+
+    if (includesDelimiter) {
+      let strArray = string?.split("\n");
+      // console.log(strArray)
+      let newDelimiter = strArray[0];
+      defaultSeparator = newDelimiter
+      string = strArray[1]
+    }
+
+    // console.log(string, defaultSeparator)
+
+    string = string.replace(/(?:\r\n|\r|\n)/g, defaultSeparator);
+
+    string?.split(defaultSeparator)?.map((el) => {
+      result += parseInt(el) || 0;
+    })
+
     return result
 
-    // correct results for calculateStringValue("1,2,4,6,34,2,323")
-    // correct results for calculateStringValue("“1\n2,3")
+    // failed results for calculateStringValue("//;\n1;2")
+    // failed results for calculateStringValue("1\n2,3")
   }
 
   const handleInputChange = (e) => {
@@ -38,8 +55,7 @@ function App() {
       <div className="container">
         <div className="input-container">
           <h3>String Calculator</h3>
-          <input
-            type="text"
+          <textarea
             value={inputValue}
             onChange={handleInputChange}
             placeholder="Enter String Value"
