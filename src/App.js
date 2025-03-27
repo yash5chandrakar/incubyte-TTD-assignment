@@ -17,9 +17,9 @@ function App() {
     // console.log(includesDelimiter)
 
     if (includesDelimiter) {
-      let strArray = string?.split("\n");
+      let strArray = string?.split("\n", 2);
       // console.log(strArray)
-      let newDelimiter = strArray[0];
+      let newDelimiter = strArray[0]?.slice(2);
       defaultSeparator = newDelimiter
       string = strArray[1]
     }
@@ -34,8 +34,8 @@ function App() {
 
     return result
 
-    // failed results for calculateStringValue("//;\n1;2")
-    // failed results for calculateStringValue("1\n2,3")
+    // correct results for calculateStringValue("//;\n1;2")
+    // correct results for calculateStringValue("1\n2,3")
   }
 
   const handleInputChange = (e) => {
