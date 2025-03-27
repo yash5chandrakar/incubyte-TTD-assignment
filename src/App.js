@@ -6,7 +6,7 @@ function App() {
 
   const calculateStringValue = (string) => {
     // current scenario ->
-    // 1.  multiple negatives
+    // 1.  Delimiters can be of any length 
     if (string === "") {
       return 0;
     }
@@ -45,8 +45,8 @@ function App() {
 
     return result
 
-    // correct results for calculateStringValue("-1,-2")
-    // correct results for calculateStringValue("-52,-3,-1")
+    // correct results for calculateStringValue("//***\n1***2***3")
+    // correct results for calculateStringValue("//a\n1a2a3")
   }
 
   const handleInputChange = (e) => {
