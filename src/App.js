@@ -6,14 +6,14 @@ function App() {
 
   const calculateStringValue = (string) => {
     // current scenario ->
-    // 1.  negative number will throw an exception
+    // 1.  multiple negatives
     if (string === "") {
       return 0;
     }
     let result = 0;
     let defaultSeparator = ","
     let includesDelimiter = string?.includes("//");
-    let isNegativeExsits = false
+    let negativeNumberArray = []
 
     // console.log(includesDelimiter)
 
@@ -32,20 +32,21 @@ function App() {
     string?.split(defaultSeparator)?.map((el) => {
       let isNumberNegative = parseInt(el) < 0;
       if (isNumberNegative) {
-        isNegativeExsits = true
+        negativeNumberArray.push(el)
       }
       result += parseInt(el) || 0;
     })
 
-    if (isNegativeExsits) {
-      toast.error("negatives not allowed")
+
+    if (negativeNumberArray?.length > 0) {
+      toast.error(`negative numbers not allowed : ${negativeNumberArray?.join(", ")}`)
       return
     }
 
     return result
 
-    // correct results for calculateStringValue("-1,2")
-    // correct results for calculateStringValue("2,3,-1")
+    // correct results for calculateStringValue("-1,-2")
+    // correct results for calculateStringValue("-52,-3,-1")
   }
 
   const handleInputChange = (e) => {
